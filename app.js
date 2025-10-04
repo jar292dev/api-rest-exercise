@@ -8,16 +8,15 @@ const PORT = process.env.PORT ?? 3000
 
 // Lista de orígenes permitidos para CORS (en produccion, usar variables de entorno o una base de datos)
 const ACCEPTED_ORIGINS = [
-  'http://localhost:8080',
-  '*' // Para pruebas desde local hacia el servidor (no recomendado en produccion)
+  'http://localhost:8080'
 ]
 
 const app = express()
 app.use(express.json()) // Habilitar req.body
-// app.use(cors()) // Habilitar CORS para todas las rutas y metodos {origin: *} (no recomendado en produccion)
-app.use(cors({
+app.use(cors()) // Habilitar CORS para todas las rutas y metodos {origin: *} (no recomendado en produccion)
+/* app.use(cors({
   origin: ACCEPTED_ORIGINS // Permitir solo este origen
-}))
+})) */
 app.disable('x-powered-by') // Deshabilitar el header de x-powered-by: Express para no dar informacion a posibles atacantes, es innecesaria
 
 app.get('/', (req, res) => {
