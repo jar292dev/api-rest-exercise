@@ -8,7 +8,8 @@ const PORT = process.env.PORT ?? 3000
 
 // Lista de orígenes permitidos para CORS (en produccion, usar variables de entorno o una base de datos)
 const ACCEPTED_ORIGINS = [
-  'http://localhost:8080'
+  'http://localhost:8080',
+  '*' // Para pruebas desde local hacia el servidor (no recomendado en produccion)
 ]
 
 const app = express()
