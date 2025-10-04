@@ -1,0 +1,77 @@
+## Fichero con las configuraciones de la API para realizar las peticiones usando la extension REST Client
+
+## Todas las peliculas
+GET http://localhost:3000/movies
+
+### Todas las peliculas filtradas por un genero
+GET http://localhost:3000/movies?genre=Action
+
+### Pelicula por ID
+GET http://localhost:3000/movies/aa391090-b938-42eb-b520-86ea0aa3917b
+
+
+### Crear una pelicula (importante la linea en blanco debajo del content-type)
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+    "title": "Avengers: Age of Ultron",
+    "year": 2015,
+    "director": "Joss Whedon",
+    "duration": 141,
+    "poster": "https://img.fruugo.com/product/5/43/725270435_max.jpg",
+    "genre": [
+      "Action",
+      "Adventure",
+      "Sci-Fi"
+    ],
+    "rate": 8
+  }
+
+### Crear una pelicula con datos invalidos (importante la linea en blanco debajo del content-type)
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+    "year": "YYYY",
+    "director": "Joss Whedon",
+    "duration": 0,
+    "poster": "https://img.fruugo.com/product/5/43/725270435_max.jpg",
+    "genre": [
+      "Action",
+      "Adventure",
+      "Sci-Fi"
+    ],
+    "rate": 8
+  }
+
+### Crear una pelicula con muchos errores para probar validaciones
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+    "title": "",
+    "director": "",
+    "year": "not_a_number",
+    "duration": -5,
+    "poster": "invalid_url",
+    "genre": ["InvalidGenre"],
+    "rate": 15
+  }
+
+### Crear una pelicula sin campos requeridos
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+    "rate": 8
+  }
+
+### Actualizar una pelicula (importante la linea en blanco debajo del content-type)
+PATCH http://localhost:3000/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+Content-Type: application/json
+
+{
+  "id": "aaaa", // Este campo se ignora en la actualizacion
+    "year": 1998
+  }
