@@ -13,10 +13,13 @@ const ACCEPTED_ORIGINS = [
 
 const app = express()
 app.use(express.json()) // Habilitar req.body
-app.use(cors()) // Habilitar CORS para todas las rutas y metodos {origin: *} (no recomendado en produccion)
-/* app.use(cors({
-  origin: ACCEPTED_ORIGINS // Permitir solo este origen
-})) */
+// app.use(cors()) // Habilitar CORS para todas las rutas y metodos {origin: *} (no recomendado en produccion)
+app.use(cors({
+  origin: '*', // Permitir todos los orígenes
+  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}))
+
 app.disable('x-powered-by') // Deshabilitar el header de x-powered-by: Express para no dar informacion a posibles atacantes, es innecesaria
 
 app.get('/', (req, res) => {
